@@ -4,32 +4,10 @@ document.addEventListener('DOMContentLoaded', function () {
     const overlayImg = document.getElementById('overlay-img');
     const overlayText = document.getElementById('overlay-text');
     const closeBtn = document.getElementById('close');
+    const shareBtn = document.getElementById('shareBtn');
     const searchInput = document.getElementById('search');
 
     let items = [];
-
-    // Crear textarea y botón de compartir solo una vez
-    const textarea = document.createElement('textarea');
-    textarea.placeholder = "Agrega un comentario...";
-    const shareBtn = document.createElement('button');
-    shareBtn.textContent = "Compartir por WhatsApp";
-    shareBtn.style.marginTop = '10px'; // Espaciado adicional para el botón
-
-    shareBtn.onclick = () => {
-        const userComment = textarea.value.trim();
-        const productDetails = overlayText.innerHTML;
-        const productName = overlayText.querySelector('strong').innerText;
-        const productImage = overlayImg.src;
-
-        // Construir el mensaje
-        const message = `${productName}\n${productDetails}\n${userComment}\n${productImage}`;
-        const encodedMessage = encodeURIComponent(message);
-        window.open(`https://wa.me/?text=${encodedMessage}`, '_blank');
-    };
-
-    // Añadir textarea y botón al overlay
-    overlayText.appendChild(textarea);
-    overlayText.appendChild(shareBtn);
 
     fetch('https://docs.google.com/spreadsheets/d/1bXsZMEn-B2t1P1FLIOFgUIeNW1AuEWTK4WdVuyV3fwI/pub?output=csv')
         .then(response => response.text())
@@ -46,12 +24,10 @@ document.addEventListener('DOMContentLoaded', function () {
                     img.src = imageUrl;
                     img.alt = name;
 
-                    // Crear elemento para nombre y precio
                     const info = document.createElement('div');
                     info.className = 'image-info';
                     info.innerHTML = `<strong>${name}</strong><br>${details}<br><span class="price">${price ? `Precio: ${price}` : ''}</span>`;
 
-                    // Añadir detalles e imagen al div
                     div.appendChild(img);
                     div.appendChild(info);
 
@@ -76,12 +52,10 @@ document.addEventListener('DOMContentLoaded', function () {
                     img.src = item.imageUrl;
                     img.alt = item.name;
 
-                    // Crear elemento para nombre y precio
                     const info = document.createElement('div');
                     info.className = 'image-info';
                     info.innerHTML = `<strong>${item.name}</strong><br>${item.details}<br><span class="price">${item.price ? `Precio: ${item.price}` : ''}</span>`;
 
-                    // Añadir detalles e imagen al div
                     div.appendChild(img);
                     div.appendChild(info);
 
@@ -98,15 +72,30 @@ document.addEventListener('DOMContentLoaded', function () {
 
     closeBtn.addEventListener('click', () => {
         overlay.style.display = 'none';
-        overlayText.innerHTML = ''; // Limpiar el contenido al cerrar
-        textarea.value = ''; // Limpiar el campo de texto
     });
 
     overlay.addEventListener('click', (e) => {
         if (e.target === overlay) {
             overlay.style.display = 'none';
-            overlayText.innerHTML = ''; // Limpiar el contenido al cerrar
-            textarea.value = ''; // Limpiar el campo de texto
         }
     });
+
+    // Funcionalidad para compartir por WhatsApp
+    shareBtn.addEventListener('click', () => {
+        const productName = overlayText.querySelector('strong').innerText;
+        const productDetails = overlayText.innerText.replace(/<[^>]*>/g, ''); // Limpia etiquetas HTML
+        const whatsappUrl = `https://wa.me/?text=${encodeURIComponent(`${productName}\n${productDetails}`)}`;
+        window.open(whatsappUrl, '_blank');
+    });
 });
+shareBtn.addEventListener('click', () => {
+    const productName = overlayText.querySelector('strong').innerText;
+    const productDetails = overlayText.innerText.replace(/<[^>]*>/g, ''); // Limpia etiquetas HTML
+    console.log('Product Name:', productName);
+    console.log('Product Details:', productDetails);
+
+    const whatsappUrl = `https://wa.me/?text=${encodeURIComponent(`${productName}\n${productDetails}`)}`;
+    console.log('WhatsApp URL:', whatsappUrl);
+    window.open(whatsappUrl, '_blank');
+});
+
