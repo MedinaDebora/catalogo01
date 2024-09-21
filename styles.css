@@ -160,3 +160,27 @@ textarea {
     background-color: #ff4d4d;
     transform: scale(1.05);
 }
+
+#shareBtn {
+    background-color: #25D366;
+    /* Color de fondo de WhatsApp */
+    color: white;
+    /* Color del texto */
+    border: none;
+    /* Sin borde */
+    border-radius: 5px;
+    /* Bordes redondeados */
+    padding: 10px 15px;
+    /* Espaciado interno */
+    font-size: 16px;
+    /* Tamaño de la fuente */
+    cursor: pointer;
+    /* Cambia el cursor al pasar el mouse */
+    transition: background-color 0.3s;
+    /* Transición suave */
+}
+
+#shareBtn:hover {
+    background-color: #128C7E;
+    /* Color de fondo al pasar el mouse */
+}
