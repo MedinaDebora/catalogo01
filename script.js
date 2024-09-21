@@ -8,6 +8,23 @@ document.addEventListener('DOMContentLoaded', function () {
 
     let items = [];
 
+    // Crear textarea y botón de compartir solo una vez
+    const textarea = document.createElement('textarea');
+    const shareBtn = document.createElement('button');
+    shareBtn.textContent = "Compartir por WhatsApp";
+    shareBtn.style.marginTop = '10px'; // Espaciado adicional para el botón
+
+    shareBtn.onclick = () => {
+        const userComment = textarea.value.trim();
+        const message = `${overlayText.querySelector('strong').innerText}\n${overlayText.querySelector('p').innerText}\n${userComment}\n${overlayImg.src}`;
+        const encodedMessage = encodeURIComponent(message);
+        window.open(`https://wa.me/?text=${encodedMessage}`, '_blank');
+    };
+
+    // Añadir textarea y botón al overlay
+    overlayText.appendChild(textarea);
+    overlayText.appendChild(shareBtn);
+
     fetch('https://docs.google.com/spreadsheets/d/1bXsZMEn-B2t1P1FLIOFgUIeNW1AuEWTK4WdVuyV3fwI/pub?output=csv')
         .then(response => response.text())
         .then(csv => {
@@ -75,20 +92,15 @@ document.addEventListener('DOMContentLoaded', function () {
 
     closeBtn.addEventListener('click', () => {
         overlay.style.display = 'none';
+        overlayText.innerHTML = ''; // Limpiar el contenido al cerrar
+        textarea.value = ''; // Limpiar el campo de texto
     });
 
     overlay.addEventListener('click', (e) => {
         if (e.target === overlay) {
             overlay.style.display = 'none';
+            overlayText.innerHTML = ''; // Limpiar el contenido al cerrar
+            textarea.value = ''; // Limpiar el campo de texto
         }
-    });
-
-    // Agregar evento para el botón de compartir
-    const shareBtn = document.getElementById('share-btn');
-    shareBtn.addEventListener('click', () => {
-        const userMessage = document.getElementById('user-message').value;
-        const message = `${overlayText.innerHTML}\n\n${userMessage}`;
-        const whatsappUrl = `https://wa.me/?text=${encodeURIComponent(message)}`;
-        window.open(whatsappUrl, '_blank');
     });
 });
