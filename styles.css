@@ -105,6 +105,14 @@ input[type="text"]::placeholder {
     position: relative;
 }
 
+/* Añadir un contenedor para los detalles dentro de la imagen */
+#details-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 10px;
+}
+
 #close {
     position: absolute;
     top: 10px;
@@ -123,6 +131,8 @@ input[type="text"]::placeholder {
 
 #overlay-text p {
     margin: 10px 0;
+    font-size: 1.1em; /* Aumentar legibilidad */
+    color: #333; /* Color más legible */
 }
 
 #additionalInfo {
@@ -134,12 +144,14 @@ input[type="text"]::placeholder {
     outline: none;
 }
 
+/* Agrandar el botón de enviar */
 #shareBtn {
     background-color: #ff4081;
     color: #fff;
-    padding: 10px 20px;
+    padding: 15px 30px; /* Aumentar tamaño del botón */
+    font-size: 1.2em; /* Aumentar el tamaño del texto del botón */
     border: none;
-    border-radius: 5px;
+    border-radius: 8px;
     cursor: pointer;
     transition: background-color 0.3s ease;
 }
@@ -164,5 +176,10 @@ input[type="text"]::placeholder {
 
     input[type="text"] {
         width: 100%;
+    }
+
+    #shareBtn {
+        font-size: 1.1em; /* Ajustar tamaño del botón en móviles */
+        padding: 12px 25px; /* Ajustar el relleno */
     }
 }
