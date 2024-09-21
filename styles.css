@@ -48,6 +48,7 @@ input[type="text"]::placeholder {
 }
 
 .image-item {
+    position: relative; /* Para permitir la superposición del texto */
     background-color: #fff;
     border-radius: 10px;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
@@ -58,98 +59,51 @@ input[type="text"]::placeholder {
 .image-item img {
     width: 100%;
     height: auto;
-    border-bottom: 2px solid #ff4081;
+    display: block;
 }
 
 .image-item:hover {
     transform: translateY(-5px);
 }
 
-.image-info {
-    padding: 10px;
-    text-align: center;
-}
-
-.image-info strong {
-    display: block;
-    font-size: 1.1em;
-    color: #ff4081;
-}
-
-.price {
-    color: #ff4081;
-    font-weight: bold;
-}
-
-/* Estilos del overlay */
-.overlay {
-    display: none;
-    position: fixed;
+/* Contenedor de texto sobre la imagen con transparencia */
+.overlay-text {
+    position: absolute;
     top: 0;
     left: 0;
     width: 100%;
     height: 100%;
-    background-color: rgba(0, 0, 0, 0.8);
-    justify-content: center;
-    align-items: center;
-    z-index: 1000;
-}
-
-.overlay-content {
-    background-color: #fff;
-    padding: 20px;
-    border-radius: 10px;
-    text-align: center;
-    max-width: 90%;
-    width: 400px;
-    position: relative;
-}
-
-/* Añadir un contenedor para los detalles dentro de la imagen */
-#details-container {
+    background-color: rgba(0, 0, 0, 0.5); /* Fondo negro semitransparente */
+    color: white;
     display: flex;
     flex-direction: column;
+    justify-content: center;
     align-items: center;
-    margin-top: 10px;
+    text-align: center;
+    padding: 20px;
+    opacity: 0;
+    transition: opacity 0.3s ease;
 }
 
-#close {
-    position: absolute;
-    top: 10px;
-    right: 10px;
-    font-size: 24px;
-    color: #ff4081;
-    cursor: pointer;
+.image-item:hover .overlay-text {
+    opacity: 1; /* Muestra el texto al hacer hover sobre la imagen */
 }
 
-#overlay-img {
-    width: 100%;
-    height: auto;
-    border-radius: 10px;
+.overlay-text h3 {
+    font-size: 1.5em;
     margin-bottom: 10px;
 }
 
-#overlay-text p {
-    margin: 10px 0;
-    font-size: 1.1em; /* Aumentar legibilidad */
-    color: #333; /* Color más legible */
+.overlay-text p {
+    font-size: 1.2em;
 }
 
-#additionalInfo {
-    width: 100%;
-    padding: 10px;
-    margin-bottom: 10px;
-    border: 2px solid #ff4081;
-    border-radius: 5px;
-    outline: none;
-}
-
-/* Agrandar el botón de enviar */
+/* Estilos del botón */
 #shareBtn {
     background-color: #ff4081;
     color: #fff;
-    padding: 15px 30px; /* Aumentar tamaño del botón */
-    font-size: 1.2em; /* Aumentar el tamaño del texto del botón */
+    padding: 15px 30px;
+    font-size: 1.2em;
     border: none;
     border-radius: 8px;
     cursor: pointer;
@@ -170,16 +124,12 @@ input[type="text"]::placeholder {
         grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
     }
 
-    .overlay-content {
-        width: 95%;
-    }
-
     input[type="text"] {
         width: 100%;
     }
 
     #shareBtn {
-        font-size: 1.1em; /* Ajustar tamaño del botón en móviles */
-        padding: 12px 25px; /* Ajustar el relleno */
+        font-size: 1.1em;
+        padding: 12px 25px;
     }
 }
