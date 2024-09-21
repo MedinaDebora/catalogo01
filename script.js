@@ -6,6 +6,7 @@ document.addEventListener('DOMContentLoaded', function () {
     const closeBtn = document.getElementById('close');
     const shareBtn = document.getElementById('shareBtn');
     const searchInput = document.getElementById('search');
+    const additionalInfoInput = document.getElementById('additionalInfo'); // Campo adicional
 
     let items = [];
 
@@ -82,20 +83,11 @@ document.addEventListener('DOMContentLoaded', function () {
 
     // Funcionalidad para compartir por WhatsApp
     shareBtn.addEventListener('click', () => {
-        const productName = overlayText.querySelector('strong').innerText;
-        const productDetails = overlayText.innerText.replace(/<[^>]*>/g, ''); // Limpia etiquetas HTML
-        const whatsappUrl = `https://wa.me/?text=${encodeURIComponent(`${productName}\n${productDetails}`)}`;
+        const productDetails = overlayText.innerText;
+        const additionalInfo = additionalInfoInput.value; // Obtener el dato adicional
+        const combinedDetails = `${productDetails}\n\nInformación adicional: ${additionalInfo}`;
+        const phoneNumber = '1158271923'; // Tu número de contacto
+        const whatsappUrl = `https://wa.me/${phoneNumber}?text=${encodeURIComponent(combinedDetails)}`;
         window.open(whatsappUrl, '_blank');
     });
 });
-shareBtn.addEventListener('click', () => {
-    const productName = overlayText.querySelector('strong').innerText;
-    const productDetails = overlayText.innerText.replace(/<[^>]*>/g, ''); // Limpia etiquetas HTML
-    console.log('Product Name:', productName);
-    console.log('Product Details:', productDetails);
-
-    const whatsappUrl = `https://wa.me/?text=${encodeURIComponent(`${productName}\n${productDetails}`)}`;
-    console.log('WhatsApp URL:', whatsappUrl);
-    window.open(whatsappUrl, '_blank');
-});
-
