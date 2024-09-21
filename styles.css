@@ -1,0 +1,162 @@
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f9f9f9;
+    color: #333;
+}
+
+.container {
+    text-align: center;
+    padding: 20px;
+    background-color: #ffb3d9;
+    /* Fondo rosa claro */
+}
+
+h1 {
+    color: #ff6f61;
+    margin-bottom: 20px;
+    font-size: 2.5em;
+    font-weight: 600;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+    /* Sombra del texto */
+}
+
+#search {
+    padding: 10px;
+    margin-bottom: 20px;
+    border: 2px solid #ff6f61;
+    border-radius: 5px;
+    font-size: 16px;
+    width: 80%;
+    max-width: 400px;
+}
+
+.gallery {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 20px;
+}
+
+.image-item {
+    position: relative;
+    display: inline-block;
+    width: 250px;
+    height: 250px;
+    overflow: hidden;
+    border-radius: 15px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.image-item img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 15px;
+    transition: transform 0.3s ease;
+}
+
+.image-item:hover {
+    transform: scale(1.05);
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.4);
+}
+
+.image-item:hover img {
+    transform: scale(1.1);
+    opacity: 0.9;
+}
+
+.image-info {
+    margin-top: 10px;
+    font-size: 16px;
+    color: #555;
+}
+
+.overlay {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.8);
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+}
+
+.overlay-content {
+    position: relative;
+    max-width: 90%;
+    max-height: 80%;
+    background: #fff;
+    border-radius: 12px;
+    padding: 20px;
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
+    text-align: center;
+}
+
+.overlay img {
+    max-width: 100%;
+    max-height: 60vh;
+    border-radius: 12px;
+    object-fit: cover;
+}
+
+.overlay p {
+    margin-top: 15px;
+    font-size: 20px;
+    color: #333;
+    line-height: 1.5;
+    font-weight: 400;
+}
+
+.close {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    font-size: 28px;
+    font-weight: bold;
+    cursor: pointer;
+    color: #ff6f61;
+}
+
+.close:hover {
+    color: #ff4d4d;
+}
+
+.overlay .price {
+    margin-top: 15px;
+    font-size: 18px;
+    color: #ff6f61;
+    font-weight: bold;
+}
+
+textarea {
+    width: 100%;
+    padding: 10px;
+    margin: 15px 0;
+    border: 2px solid #ff6f61;
+    border-radius: 5px;
+    resize: none;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+}
+
+#share-btn {
+    padding: 10px 20px;
+    background-color: #ff6f61;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+    transition: background-color 0.3s ease, transform 0.3s ease;
+}
+
+#share-btn:hover {
+    background-color: #ff4d4d;
+    transform: scale(1.05);
+}
